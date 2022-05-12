@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!--CSS File For Question-->
+<style>
+    .hide{
+        display: none;
+    }
+
+    .controls{
+        display: grid;
+        grid-template-columns: repeat(1, auto);
+        gap: 10px;
+        margin: 20px 0;
+        width: 100px;
+    }
+</style>
+
+<!--Java Script File For Question-->
+<script>
+    //variables for questions
+    var question1=document.getElementById('Question1');
+    var question2=document.getElementById('Question2');
+    var question3=document.getElementById('Question3');
+    var question4=document.getElementById('Question4');
+    
+    //variables for the buttons to link to other questions
+    var button1=document.getElementById('button1');
+    var button2=document.getElementById('button2');
+    var button3=document.getElementById('button3');
+    var button4=document.getElementById('button4');    
+    
+    //Function to check the answer to the question and output appropriate response
+    function check(){
+        var score = 0;
+        var totalScore;
+    
+        //FIXME: make variable for each question and answer
+        var q1=document.Question1.question1.value;
+        var q2=document.Question2.question2.value;
+        var q3=document.Question3.question3.value;
+        var q4=document.Question4.question4.value;
+        var result=document.getElementById('result');
+        var question1=document.getElementById('Question1');
+        var question2=document.getElementById('Question2');
+        var question3=document.getElementById('Question3');
+        var question4=document.getElementById('Question4');
+    
+        //variables for the buttons to link to other questions
+        var button1=document.getElementById('button1');
+        var button2=document.getElementById('button2');
+        var button3=document.getElementById('button3');
+        var button4=document.getElementById('button4');
+    
+        //clear the answers from previous questions so that score will not be affected by them
+        if (localStorage.getItem('quizQues1') == 'true'){
+            q1 = "null";
+        }
+        else if(localStorage.getItem('quizQues2') == 'true'){
+            q2 = "null";
+        }
+        else if(localStorage.getItem('quizQues3') == 'true'){
+            q3 = "null";
+        }
+        else if(localStorage.getItem('quizQues4') == 'true'){
+            q4 = "null";
+        }
+    
+        //Check if the user's answer is correct, iterate the score if it is, then output appropriate message
+        //console.log(q2);
+        //console.log(q1);
+        if (q1 == "red/green"){
+            score++;
+            //console.log('q1 flag');
+        }
+    
+        if (q2 == '4'){
+            score++;
+            //console.log('test');
+        }
+    
+        if (q3 == '7'){
+            score++;
+            //console.log('test');
+        }
+    
+        if (q4 == "Mammal"){
+            score++;
+            //console.log('q4 flag');
+        }
+        
+    
+        //Check if the user has alreadt attempted this question return if they have
+        //question 1
+        if (q1 != "null"){
+            if(localStorage.getItem('quizQues1') == 'true'){
+                //result.textContent='You have already answered this question and cannot earn any more points.';
+                //alert("You have already answered this question and cannot earn any more points from it.")
+                alert("1")
+                return;
+            }
+            else{
+                //Record that the user has attempted the question
+                localStorage.setItem('quizQues1', 'true');
+            }
+        }
+        else if(q2 != "null"){
+            if(localStorage.getItem('quizQues2') == 'true'){
+            //result.textContent='You have already answered this question and cannot earn any more points.';
+            //alert("You have already answered this question and cannot earn any more points from it.")
+            alert("2")
+            return;
+            }
+            else{
+                //Record that the user has attempted the question
+                localStorage.setItem('quizQues2', 'true');
+            }
+    
+        }
+        else if(q3 != "null"){
+            if(localStorage.getItem('quizQues3') == 'true'){
+                //result.textContent='You have already answered this question and cannot earn any more points.';
+                //alert("You have already answered this question and cannot earn any more points from it.")
+                alert("3")
+                return;
+            }
+            else{
+                //Record that the user has attempted the question
+                localStorage.setItem('quizQues3', 'true');
+            }
+
+        }
+        else if(q4 != "null"){
+            if(localStorage.getItem('quizQues4') == 'true'){
+                //result.textContent='You have already answered this question and cannot earn any more points.';
+                //alert("You have already answered this question and cannot earn any more points from it.")
+                alert("4")
+                return;
+            }
+            else{
+                //Record that the user has attempted the question
+                localStorage.setItem('quizQues4', 'true');
+            }
+        }
+    
+        //store the users score into local storage
+        totalScore = localStorage.getItem('userScore');
+    
+        //check if userScore is null meaning this is their first question
+        if (totalScore == null){
+            localStorage.setItem('userScore', score);
+        }
+        else{
+            //add the previous score to the new score then put it into local storage
+            for (let i = 0; i < score; i++){
+                totalScore++;
+            }
+            localStorage.setItem('userScore', totalScore);
+        }
+        
+        //clear the question away to display the results
+        //question1.style.display = "none";
+        question1.classList.add('hide');
+        question2.classList.add('hide');
+        question3.classList.add('hide');
+        question4.classList.add('hide');
+    
+        //Tell user if the got question correct
+        if (score > 0){
+            result.textContent='Correct! You Earned 1 Point!';
+        }
+        else{
+            //change correction based on which question was answered
+            result.textContent='Incorrect. The correct answer is ';
+            if (q1 != ''){
+                result.textContent=result.textContent + 'Red/Green';
+            }
+            else if (q2 != ''){
+                result.textContent=result.textContent + '4';
+            }
+            else if (q3 != ''){
+                result.textContent=result.textContent + '7';
+            }
+            else if (q4 != ''){
+                result.textContent=result.textContent + 'Mammal';
+            }
+        }
+    
+        //Output the total score for the user
+        totScore.textContent='Total Score: ' + localStorage.getItem('userScore');    
+    
+        //Output Message to User
+        messageOne.textContent='There are still other questions to find! Click on a question button to get a hint for its location.';
+    
+        //Make question buttons appear
+        button1.classList.remove('hide');
+        button2.classList.remove('hide');
+        button3.classList.remove('hide');
+        button4.classList.remove('hide');
+    
+        return;
+    }
+    
+    //function to reveal selected question while hiding the rest
+    //If user has not scanned the QR Code, output hint of location
+    function question1(){
+        //console.log('1');
+        var question1=document.getElementById('Question1');
+        var button1=document.getElementById('button1');
+        var button2=document.getElementById('button2');
+        var button3=document.getElementById('button3');
+        var button4=document.getElementById('button4');
+        var backButton=document.getElementById('back-btn')
+        
+        //hide the buttons and remove the messages after questions has been picked
+        button1.classList.add('hide');
+        button2.classList.add('hide');
+        button3.classList.add('hide');
+        button4.classList.add('hide');
+    
+        result.textContent='';
+        totScore.textContent='';
+        messageOne.textContent='';
+    
+        //check if the user has visited the question before and unhide the question if they have
+        if(localStorage.getItem('quizQues1') == 'true'){
+            question1.classList.remove('hide');
+        }
+        else{
+            messageOne.textContent='Hint to the location of QR code for Question 1.';
+        }
+    
+        //unhide button to go back to the previous page
+        backButton.classList.remove('hide');
+    
+        return;
+    }
+    
+    function question2(){
+        //console.log('2');
+        var question2=document.getElementById('Question2');
+        var button1=document.getElementById('button1');
+        var button2=document.getElementById('button2');
+        var button3=document.getElementById('button3');
+        var button4=document.getElementById('button4');
+        var backButton=document.getElementById('back-btn')
+        
+        //hide the buttons and remove the messages after questions has been picked
+        button1.classList.add('hide');
+        button2.classList.add('hide');
+        button3.classList.add('hide');
+        button4.classList.add('hide');
+    
+        result.textContent='';
+        totScore.textContent='';
+        messageOne.textContent='';
+    
+        //check if the user has visited the question before and unhide the question if they have
+        if(localStorage.getItem('quizQues2') == 'true'){
+            question2.classList.remove('hide');
+        }
+        else{
+            messageOne.textContent='Hint to the location of QR code for Question 2.';
+        }
+    
+        //unhide button to go back to the previous page
+        backButton.classList.remove('hide');
+    
+        return;
+    }
+    
+    function question3(){
+        //console.log('3');
+        var question3=document.getElementById('Question3');
+        var button1=document.getElementById('button1');
+        var button2=document.getElementById('button2');
+        var button3=document.getElementById('button3');
+        var button4=document.getElementById('button4');
+        var backButton=document.getElementById('back-btn')
+        
+        //hide the buttons and remove the messages after questions has been picked
+        button1.classList.add('hide');
+        button2.classList.add('hide');
+        button3.classList.add('hide');
+        button4.classList.add('hide');
+    
+        result.textContent='';
+        totScore.textContent='';
+        messageOne.textContent='';
+    
+        //check if the user has visited the question before and unhide the question if they have
+        if(localStorage.getItem('quizQues3') == 'true'){
+            question3.classList.remove('hide');
+        }
+        else{
+            messageOne.textContent='Hint to the location of QR code for Question 3.';
+        }
+    
+        //unhide button to go back to the previous page
+        backButton.classList.remove('hide');
+    
+        return;
+    }
+    
+    function question4(){
+        //console.log('4');
+        var question4=document.getElementById('Question4');
+        var button1=document.getElementById('button1');
+        var button2=document.getElementById('button2');
+        var button3=document.getElementById('button3');
+        var button4=document.getElementById('button4');
+        var backButton=document.getElementById('back-btn')
+        
+        //hide the buttons and remove the messages after questions has been picked
+        button1.classList.add('hide');
+        button2.classList.add('hide');
+        button3.classList.add('hide');
+        button4.classList.add('hide');
+    
+        result.textContent='';
+        totScore.textContent='';
+        messageOne.textContent='';
+    
+        //check if the user has visited the question before and unhide the question if they have
+        if(localStorage.getItem('quizQues4') == 'true'){
+            question4.classList.remove('hide');
+        }
+        else{
+            messageOne.textContent='Hint to the location of QR code for Question 4.';
+        }
+    
+        //unhide button to go back to the previous page
+        backButton.classList.remove('hide');
+    
+        return;
+    }
+    
+    function back(){
+        var button1=document.getElementById('button1');
+        var button2=document.getElementById('button2');
+        var button3=document.getElementById('button3');
+        var button4=document.getElementById('button4');
+        var question1=document.getElementById('Question1');
+        var question2=document.getElementById('Question2');
+        var question3=document.getElementById('Question3');
+        var question4=document.getElementById('Question4');
+        var backButton=document.getElementById('back-btn')
+    
+        //Output Message to User
+        messageOne.textContent='There are still other questions to find! Click on a question button to get a hint for its location.';
+    
+        //Make question buttons appear then hide the back button
+        button1.classList.remove('hide');
+        button2.classList.remove('hide');
+        button3.classList.remove('hide');
+        button4.classList.remove('hide');
+        backButton.classList.add('hide');
+    
+        //Make sure that the questions are hidden
+        question1.classList.remove('hide');
+        question2.classList.remove('hide'); 
+        question3.classList.remove('hide');
+        question4.classList.remove('hide'); 
+        question1.classList.add('hide');
+        question2.classList.add('hide'); 
+        question3.classList.add('hide');
+        question4.classList.add('hide'); 
+    
+        return;
+    }
+    
+    //Function used to search the URL for parameters related to which question to display when QR code scanned
+    function getParameter( parameterName ){
+        let parameters = new URLSearchParams( window.location.search );
+        return parameters.get( parameterName );
+    }
+
+    //call getParameter function when the page has loaded and reveal appropriate question
+//var questionNum;
+    
+window.onload = function(){
+    var button1=document.getElementById('button1');
+    var button2=document.getElementById('button2');
+    var button3=document.getElementById('button3');
+    var button4=document.getElementById('button4');
+    var question1=document.getElementById('Question1');
+    var question2=document.getElementById('Question2');
+    var question3=document.getElementById('Question3');
+    var question4=document.getElementById('Question4');
+    let questionNum = getParameter("num");
+        
+    //store variable in local storage to get later
+    //localStorage.setItem('questionNum', questionNum);
+    console.log(questionNum);
+    
+    //unhide the appropriate question
+    if (questionNum == 1){
+        question1.classList.remove('hide');
+    }
+    else if(questionNum == 2){
+        question2.classList.remove('hide');
+    }
+    else if(questionNum == 3){
+        question3.classList.remove('hide');
+    }
+    else if(questionNum == 4){
+        question4.classList.remove('hide');
+    }
+    else{
+        //if user did not scan qr code to get to page open question select
+        //Output Message to User
+        messageOne.textContent='Click on a question button to get a hint for its location.';
+    
+        //Make question buttons appear
+        button1.classList.remove('hide');
+        button2.classList.remove('hide');
+        button3.classList.remove('hide');
+        button4.classList.remove('hide');
+    }
+}
+ 
+</script>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--Give the Website a Title and link the html to js and css file-->
+    <title>Question 1</title>
+
+    <!--Link the html to its css and js file-->
+    <!--<link rel="stylesheet" type="text/css" href="Question1.css">
+    <script type="text/javascript" src="Question1.js"></script>-->
+</head>
+<body>
+    <!--Links to the home page and any other needed links-->
+    <!--<a href="index.html">Check Your Score</a>-->
+
+    <!--Asks the question1 and gives the possible answers-->
+    <form name="Question1" id="Question1" class="hide">
+        <div>
+            <p>What color are apples?</p>
+            <p><input type="radio" name="question1" value="purple">A. Purple</p>
+            <p><input type="radio" name="question1" value="blue">B. Blue</p>
+            <p><input type="radio" name="question1" value="red/green">C. Red/Green</p>
+            <p><input type="radio" name="question1" value="pink">D. Pink</p>
+        </div>
+
+        <!--Creates the button for the use to submit their answer and call check answer function-->
+        <input type="button" name="" value="Submit Answer!" id="button" onclick="check()">
+    </form>
+
+    <!--Asks the question2 and gives the possible answers-->
+    <form name="Question2" id="Question2" class="hide">
+        <div>
+            <p>What is 2+2?</p>
+            <p><input type="radio" name="question2" value="1">A. 1</p>
+            <p><input type="radio" name="question2" value="2">B. 2</p>
+            <p><input type="radio" name="question2" value="3">C. 3</p>
+            <p><input type="radio" name="question2" value="4">D. 4</p>
+        </div>
+
+        <!--Creates the button for the use to submit their answer and call check answer function-->
+        <input type="button" name="" value="Submit Answer!" id="button" onclick="check()">
+    </form>
+
+    <!--Asks the question3 and gives the possible answers-->
+    <form name="Question3" id="Question3" class="hide">
+        <div>
+            <p>What is 5+2?</p>
+            <p><input type="radio" name="question3" value="7">A. 7</p>
+            <p><input type="radio" name="question3" value="2">B. 2</p>
+            <p><input type="radio" name="question3" value="3">C. 3</p>
+            <p><input type="radio" name="question3" value="4">D. 4</p>
+        </div>
+
+        <!--Creates the button for the use to submit their answer and call check answer function-->
+        <input type="button" name="" value="Submit Answer!" id="button" onclick="check()">
+    </form>
+
+    <!--Asks the question3 and gives the possible answers-->
+    <form name="Question4" id="Question4" class="hide">
+        <div>
+            <p>What kind of animal is a bear?</p>
+            <p><input type="radio" name="question4" value="Reptile">A. Reptile</p>
+            <p><input type="radio" name="question4" value="Mammal">B. Mammal</p>
+            <p><input type="radio" name="question4" value="Insect">C. Insect</p>
+            <p><input type="radio" name="question4" value="Plant">D. Plant</p>
+        </div>
+
+        <!--Creates the button for the use to submit their answer and call check answer function-->
+        <input type="button" name="" value="Submit Answer!" id="button" onclick="check()">
+    </form>
+
+    <!--Display the result to the question-->
+    <p id="result" class=""></p>
+
+    <!--Display the users total score-->
+    <p id="totScore" class=""></p>
+
+    <!--Display Buttons for Other Questions-->
+    <p id="messageOne" class=""></p>
+
+    <!--div to Display buttons to the other questions-->
+    <div class="controls">
+        <input type="button" name="" class="hide" value="Question 1" id="button1" onclick="question1()">
+        <input type="button" name="" class="hide" value="Question 2" id="button2" onclick="question2()">
+        <input type="button" name="" class="hide" value="Question 3" id="button3" onclick="question3()">
+        <input type="button" name="" class="hide" value="Question 4" id="button4" onclick="question4()">
+    </div>
+
+    <!--display back button within hint window-->
+    <div class="back">
+        <input type="button" name="" class="hide" value="Go Back" id="back-btn" onclick="back()">
+    </div>
+
+
+
+    
+</body>
+</html>

@@ -1,0 +1,31 @@
+header{
+    /*Used for mobile optimization*/
+    min-height: 100px;
+    margin-left: 40%;
+    margin-right: 10%;
+}
+
+/*adjust font size/color/position of question text*/
+body {
+    background-color:#275232;
+    color: white;
+    font-size: 20px;
+    font-weight: bolder;
+    /*Used for mobile optimization*/
+    min-height: 400px;
+    margin-left: 40%;
+    margin-right: 10%;
+    margin-top: 3%;
+}
+
+/*Adjust Characteristics of the button */
+#button {
+    background-color: #9aeb8a;
+    color: black;
+    font-size: 15px;
+    padding: 5px;
+    /*Used for mobile optimization*/
+    min-height: 40px;
+    margin-left: 0%;
+    margin-right: 10%;
+}

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!--Java Script File For Question-->
+<script>
+//Function to check the answer to the question and output appropriate response
+function check(){
+    var score = 0;
+    var totalScore;
+    var q1=document.Question1.question1.value;
+    var result=document.getElementById('result');
+    var question1=document.getElementById('Question1');
+
+    //Check if the user's answer is correct, iterate the score if it is, then output appropriate message
+    if (q1 == "red/green"){
+        score++;
+        //document.write("Correct!");
+    }
+    //Check if the user has alreadt attempted this question return if they have
+    if(localStorage.getItem('quizQues1') == 'true'){
+        //result.textContent='You have already answered this question and cannot earn any more points.';
+        alert("You have already answered this question and cannot earn any more points from it.")
+        return;
+    }
+
+    //Record that the user has attempted the question
+    localStorage.setItem('quizQues1', 'true');
+
+    //store the users score into local storage
+    totalScore = localStorage.getItem('userScore');
+
+    //check if userScore is null meaning this is their first question
+    if (totalScore == null){
+        localStorage.setItem('userScore', score);
+    }
+    else{
+        //add the previous score to the new score then put it into local storage
+        for (let i = 0; i < score; i++){
+            totalScore++;
+        }
+        localStorage.setItem('userScore', totalScore);
+    }
+    
+    //clear the question away to display the results
+    question1.style.display = "none";
+
+    //Tell user if the got question correct
+    if (score > 0){
+        result.textContent='Correct! You Earned 1 Point!';
+    }
+    else{
+        result.textContent='Incorrect. The correct answer is Red/Green';
+    }
+    return;
+}
+</script>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--Give the Website a Title and link the html to js and css file-->
+    <title>Question 1</title>
+
+    <!--Link the html to its css and js file-->
+    <!--<link rel="stylesheet" type="text/css" href="Question1.css">
+    <script type="text/javascript" src="Question1.js"></script>-->
+</head>
+<body>
+    <!--Links to the home page and any other needed links-->
+    <a href="Quiz Home Page.html">Check Your Score</a>
+
+    <!--Asks the question and gives the possible answers-->
+    <form name="Question1" id="Question1">
+        <div>
+            <p>What color are apples?</p>
+            <p><input type="radio" name="question1" value="purple">A. Purple</p>
+            <p><input type="radio" name="question1" value="blue">B. Blue</p>
+            <p><input type="radio" name="question1" value="red/green">C. Red/Green</p>
+            <p><input type="radio" name="question1" value="pink">D. Pink</p>
+        </div>
+
+        <!--Creates the button for the use to submit their answer and call check answer function-->
+        <input type="button" name="" value="Submit Answer!" id="button" onclick="check()">
+    </form>
+
+    <p id="result"></p>
+    
+</body>
+</html>

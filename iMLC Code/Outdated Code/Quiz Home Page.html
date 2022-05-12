@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang = "en">
+
+<!--Java Script File For Home Page-->
+<script>
+//Function to retrieve the user's score from the local storage
+function getScore(){
+    var totalScore;
+    var result=document.getElementById('result');
+
+    totalScore = localStorage.getItem('userScore');
+
+    //check if userScore is null to see if the answered any questions yet
+    if (totalScore == null){
+        result.textContent='You have zero points. You need to find and answer some questions';
+    }
+    else{
+        result.textContent='Total Score is ' + totalScore;
+    }
+}
+
+//functions to link the user to question 1 if they have found it
+function linkQues1(){
+   
+    //check if the user has visited question 1
+    if (localStorage.getItem('quizQues1') == 'true'){
+        document.location.href = "Quiz Question 1.html"
+    }
+    else{
+        alert("You have not attemted that question yet. Please find it.");
+    }
+}
+</script>
+
+    <head>
+        <title>iMLC Test Webpage</title> 
+        <style>
+            img {
+                width: 300px;
+                border-radius: 50px;
+                float: left;
+                margin-right: 15px;
+            }
+
+            p.messageOne{
+               font-weight: bold; 
+            }
+
+        </style>
+
+        <!--Link the html to its css and js file-->
+        <!--<link rel="stylesheet" type="text/css" href="index.css">
+        <script type="text/javascript" src="index.js"></script>-->
+    </head>
+    <body>
+        <!--Button to link to questions that the user has found-->
+        <form>
+            <input type="button" name="" value= "Question 1" id="ques1" onclick="linkQues1()">
+        </form>
+
+        <h1>iMLC Test Quiz</h1>
+        <!--Creates the button for the use to get their score-->
+        <form>
+            <input type="button" name="" value="Check Score" id="button" onclick="getScore()">
+        </form>
+
+        <!--Used for output the total score of the user-->
+        <p id="result"></p>
+    </body>
+</html>

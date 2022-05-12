@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<!--CSS Code for file-->
+<style>
+*, *::before, *::after {
+    box-sizing: border-box;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+body {
+    padding: 0;
+    margin: 0;
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+    background-color: #066b17;
+}
+
+.container{
+    width: 400px;
+    max-width: 80%;
+    background-color: white;
+    border-radius: 5px;
+    padding: 10px;
+    box-shadow: 0 0 10px 2px;
+}
+
+.btn-grid{
+    display: grid;
+    grid-template-columns: repeat(2, auto);
+    gap: 10px;
+    margin: 20px 0;
+}
+
+.btn{
+    background-color: #16b00b;
+    border: black;
+    border-radius: 5px;
+    padding: 5px 10px;
+    outline: none;
+}
+
+.start-btn, .next-btn{
+    font-size: 1.5rem;
+    font-weight: bold;
+    padding: 10px 20px;
+}
+
+.controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.hide {
+    display: none;
+}
+</style>
+
+<!--Java Script Code for file-->
+<script>
+//declare the global variables
+const startButton = document.getElementById('start-btn');
+
+//when start button is clicked execute the startGame function
+if (startButton){
+    startButton.addEventListener('click', startGame);
+}
+
+//function used to start the question
+function startGame(){
+    console.log('Started');
+}
+
+//use to select the question based on the QR code that is scanned
+function setNextQuestion(){
+
+}
+
+//function to allow the user to select their answer
+function selectAnswer(){
+
+}
+
+</script>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>iMLC Quiz</title>
+</head>
+<body>
+    <div class="container">
+        <!--Container used to reference questions-->
+        <div id="question-container" class="hide">
+            <div id="question">Question Text</div>
+            <div id="answer-buttons" class="btn-grid">
+                <button class="btn">Answer 1</button>
+                <button class="btn">Answer 2</button>
+                <button class="btn">Answer 3</button>
+                <button class="btn">Answer 4</button>
+            </div>
+        </div>
+        <!--Container for the start and submit buttons-->
+        <div class="controls">
+            <button id="start-btn" class="start-btn btn">Start</button>
+            <button id="next-btn" class="next-btn btn hide">Submit</button>
+        </div>
+    </div>
+</body>
+</html>

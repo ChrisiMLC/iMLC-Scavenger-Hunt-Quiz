@@ -1,0 +1,22 @@
+body {
+    background-color:#275232;
+    color: white;
+    font-size: 20px;
+    font-weight: bolder;
+    margin-left: 2rem;
+}
+
+/*Adjust Characteristics of the button */
+#button {
+    background-color: #9aeb8a;
+    color: black;
+    font-size: 15px;
+    padding: 5px;
+}
+
+#ques1 {
+    background-color: #9aeb8a;
+    color: black;
+    font-size: 15px;
+    padding: 5px;
+}
